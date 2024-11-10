@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center justify-between px-4 h-14">
     <div class="flex items-center gap-x-4">
-      <h2 class="text-xl md:text-2xl text-primary font-bold">Hub Chat</h2>
-      <UTooltip text="Clear chat" v-if="!clearDisabled">
+      <h2 class="text-xl md:text-2xl text-primary font-bold">快点AI助手</h2>
+      <UTooltip text="清除内容" v-if="!clearDisabled">
         <UButton
           color="gray"
           icon="i-heroicons-trash"
@@ -16,7 +16,7 @@
         icon="i-simple-icons-github"
         color="gray"
         variant="ghost"
-        to="https://github.com/ra-jeev/hub-chat"
+        to="https://github.com/muzihuaner/hub-chat"
         target="_blank"
       />
       <UButton

@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between px-4 h-14">
       <div class="flex items-center gap-x-4">
         <h2 class="md:text-lg text-gray-600 dark:text-gray-300">
-          LLM Settings
+          LLM 设置
         </h2>
       </div>
       <UButton
@@ -16,7 +16,7 @@
     </div>
     <UDivider />
     <div class="p-4 flex-1 space-y-6 overflow-y-auto">
-      <UFormGroup label="Model">
+      <UFormGroup label="模型">
         <USelectMenu
           v-model="llmParams.model"
           size="md"
@@ -28,7 +28,7 @@
 
       <RangeInput
         v-model="llmParams.temperature"
-        label="Temperature"
+        label="温度"
         :min="0"
         :max="5"
         :step="0.1"
@@ -36,12 +36,12 @@
 
       <RangeInput
         v-model="llmParams.maxTokens"
-        label="Max Tokens"
+        label="最大令牌数"
         :min="1"
         :max="4096"
       />
 
-      <UFormGroup label="System Prompt">
+      <UFormGroup label="系统提示">
         <UTextarea
           v-model="llmParams.systemPrompt"
           :rows="3"
@@ -51,7 +51,7 @@
       </UFormGroup>
 
       <div class="flex items-center justify-between">
-        <span>Stream Response</span>
+        <span>流式响应</span>
         <UToggle v-model="llmParams.stream" />
       </div>
 
@@ -80,7 +80,7 @@
 
             <RangeInput
               v-model="llmParams.frequencyPenalty"
-              label="Frequency Penalty"
+              label="频率惩罚"
               :min="0"
               :max="2"
               :step="0.1"
@@ -88,7 +88,7 @@
 
             <RangeInput
               v-model="llmParams.presencePenalty"
-              label="Presence Penalty"
+              label="存在惩罚"
               :min="0"
               :max="2"
               :step="0.1"
@@ -96,7 +96,7 @@
 
             <RangeInput
               v-model="llmParams.repetitionPenalty"
-              label="Repetition Penalty"
+              label="重复惩罚"
               :min="0"
               :max="2"
               :step="0.1"
@@ -106,19 +106,19 @@
       </UAccordion>
 
       <UButton color="gray" size="sm" block @click="$emit('reset')">
-        Reset settings
+        重置设置
       </UButton>
     </div>
     <div class="p-2">
       <UButton
-        to="https://hub.nuxt.com?utm_source=hub-chat"
+        to="https://www.gov.cn/zhengce/zhengceku/202307/content_6891752.htm"
         target="_blank"
         variant="link"
         color="gray"
         rel="noopener"
         size="sm"
       >
-        Hosted on NuxtHub
+        《生成式人工智能服务管理暂行办法》
       </UButton>
     </div>
   </div>
@@ -136,7 +136,7 @@ defineEmits(['hideDrawer', 'reset']);
 
 const accordionItems = [
   {
-    label: 'Advanced Settings',
+    label: '高级设置',
     defaultOpen: false,
   },
 ];
