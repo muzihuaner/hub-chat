@@ -6,14 +6,14 @@
       :ui="{ width: 'max-w-xs' }"
     >
       <LlmSettings
-        v-model:llmParams="llmParams"
+        v-model:llm-params="llmParams"
         @hide-drawer="isDrawerOpen = false"
         @reset="resetSettings"
       />
     </USlideover>
 
     <div class="hidden md:block md:w-1/3 lg:w-1/4">
-      <LlmSettings v-model:llmParams="llmParams" @reset="resetSettings" />
+      <LlmSettings v-model:llm-params="llmParams" @reset="resetSettings" />
     </div>
 
     <UDivider orientation="vertical" class="hidden md:block" />
@@ -37,7 +37,7 @@ import type { ChatMessage, LlmParams, LoadingType } from '~~/types';
 const isDrawerOpen = ref(false);
 
 const defaultSettings: LlmParams = {
-  model: '@cf/meta/llama-3.1-8b-instruct',
+  model: '@cf/meta/llama-3.2-3b-instruct',
   temperature: 0.6,
   maxTokens: 512,
   systemPrompt: 'You are a helpful assistant.',

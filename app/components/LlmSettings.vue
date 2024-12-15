@@ -17,13 +17,7 @@
     <UDivider />
     <div class="p-4 flex-1 space-y-6 overflow-y-auto">
       <UFormGroup label="Model">
-        <USelectMenu
-          v-model="llmParams.model"
-          size="md"
-          :options="models"
-          value-attribute="id"
-          option-attribute="name"
-        />
+        <USelectMenu v-model="llmParams.model" size="md" :options="models" />
       </UFormGroup>
 
       <RangeInput
@@ -141,93 +135,48 @@ const accordionItems = [
   },
 ];
 
-const models = [
-  {
-    name: 'deepseek-coder-6.7b-base-awq',
-    id: '@hf/thebloke/deepseek-coder-6.7b-base-awq',
-  },
-  {
-    name: 'deepseek-coder-6.7b-instruct-awq',
-    id: '@hf/thebloke/deepseek-coder-6.7b-instruct-awq',
-  },
-  {
-    name: 'deepseek-math-7b-base',
-    id: '@cf/deepseek-ai/deepseek-math-7b-base',
-  },
-  {
-    name: 'deepseek-math-7b-instruct',
-    id: '@cf/deepseek-ai/deepseek-math-7b-instruct',
-  },
-  {
-    name: 'discolm-german-7b-v1-awq',
-    id: '@cf/thebloke/discolm-german-7b-v1-awq',
-  },
-  { name: 'falcon-7b-instruct', id: '@cf/tiiuae/falcon-7b-instruct' },
-  { name: 'gemma-2b-it-lora', id: '@cf/google/gemma-2b-it-lora' },
-  { name: 'gemma-7b-it-lora', id: '@cf/google/gemma-7b-it-lora' },
-  { name: 'gemma-7b-it', id: '@hf/google/gemma-7b-it' },
-  {
-    name: 'hermes-2-pro-mistral-7b',
-    id: '@hf/nousresearch/hermes-2-pro-mistral-7b',
-  },
-  { name: 'llama-2-13b-chat-awq', id: '@hf/thebloke/llama-2-13b-chat-awq' },
-  { name: 'llama-2-7b-chat-fp16', id: '@cf/meta/llama-2-7b-chat-fp16' },
-  {
-    name: 'llama-2-7b-chat-hf-lora',
-    id: '@cf/meta-llama/llama-2-7b-chat-hf-lora',
-  },
-  { name: 'llama-3-8b-instruct', id: '@cf/meta/llama-3-8b-instruct' },
-  { name: 'llama-3-8b-instruct-awq', id: '@cf/meta/llama-3-8b-instruct-awq' },
-  { name: 'llama-3.1-8b-instruct', id: '@cf/meta/llama-3.1-8b-instruct' },
-  {
-    name: 'llama-3.1-8b-instruct-awq',
-    id: '@cf/meta/llama-3.1-8b-instruct-awq',
-  },
-  {
-    name: 'llama-3.1-8b-instruct-fp8',
-    id: '@cf/meta/llama-3.1-8b-instruct-fp8',
-  },
-  { name: 'llamaguard-7b-awq', id: '@hf/thebloke/llamaguard-7b-awq' },
-  {
-    name: 'mistral-7b-instruct-v0.1',
-    id: '@cf/mistral/mistral-7b-instruct-v0.1',
-  },
-  {
-    name: 'mistral-7b-instruct-v0.1-awq',
-    id: '@hf/thebloke/mistral-7b-instruct-v0.1-awq',
-  },
-  {
-    name: 'mistral-7b-instruct-v0.2-lora',
-    id: '@cf/mistral/mistral-7b-instruct-v0.2-lora',
-  },
-  {
-    name: 'mistral-7b-instruct-v0.2',
-    id: '@hf/mistral/mistral-7b-instruct-v0.2',
-  },
-  {
-    name: 'neural-chat-7b-v3-1-awq',
-    id: '@hf/thebloke/neural-chat-7b-v3-1-awq',
-  },
-  { name: 'openchat-3.5-0106', id: '@cf/openchat/openchat-3.5-0106' },
-  {
-    name: 'openhermes-2.5-mistral-7b-awq',
-    id: '@hf/thebloke/openhermes-2.5-mistral-7b-awq',
-  },
-  { name: 'phi-2', id: '@cf/microsoft/phi-2' },
-  { name: 'qwen1.5-0.5b-chat', id: '@cf/qwen/qwen1.5-0.5b-chat' },
-  { name: 'qwen1.5-1.8b-chat', id: '@cf/qwen/qwen1.5-1.8b-chat' },
-  { name: 'qwen1.5-14b-chat-awq', id: '@cf/qwen/qwen1.5-14b-chat-awq' },
-  { name: 'qwen1.5-7b-chat-awq', id: '@cf/qwen/qwen1.5-7b-chat-awq' },
-  { name: 'sqlcoder-7b-2', id: '@cf/defog/sqlcoder-7b-2' },
-  { name: 'starling-lm-7b-beta', id: '@hf/nexusflow/starling-lm-7b-beta' },
-  {
-    name: 'tinyllama-1.1b-chat-v1.0',
-    id: '@cf/tinyllama/tinyllama-1.1b-chat-v1.0',
-  },
-  {
-    name: 'una-cybertron-7b-v2-bf16',
-    id: '@cf/fblgit/una-cybertron-7b-v2-bf16',
-  },
-  { name: 'zephyr-7b-beta-awq', id: '@hf/thebloke/zephyr-7b-beta-awq' },
+const defaultModels = [
+  '@hf/thebloke/deepseek-coder-6.7b-base-awq',
+  '@hf/thebloke/deepseek-coder-6.7b-instruct-awq',
+  '@cf/deepseek-ai/deepseek-math-7b-base',
+  '@cf/deepseek-ai/deepseek-math-7b-instruct',
+  '@cf/thebloke/discolm-german-7b-v1-awq',
+  '@cf/tiiuae/falcon-7b-instruct',
+  '@cf/google/gemma-2b-it-lora',
+  '@cf/google/gemma-7b-it-lora',
+  '@hf/google/gemma-7b-it',
+  '@hf/nousresearch/hermes-2-pro-mistral-7b',
+  '@hf/thebloke/llama-2-13b-chat-awq',
+  '@cf/meta/llama-2-7b-chat-fp16',
+  '@cf/meta-llama/llama-2-7b-chat-hf-lora',
+  '@cf/meta/llama-3-8b-instruct',
+  '@cf/meta/llama-3-8b-instruct-awq',
+  '@cf/meta/llama-3.1-8b-instruct',
+  '@cf/meta/llama-3.1-8b-instruct-awq',
+  '@cf/meta/llama-3.1-8b-instruct-fp8',
+  '@hf/thebloke/llamaguard-7b-awq',
+  '@cf/mistral/mistral-7b-instruct-v0.1',
+  '@hf/thebloke/mistral-7b-instruct-v0.1-awq',
+  '@cf/mistral/mistral-7b-instruct-v0.2-lora',
+  '@hf/mistral/mistral-7b-instruct-v0.2',
+  '@hf/thebloke/neural-chat-7b-v3-1-awq',
+  '@cf/openchat/openchat-3.5-0106',
+  '@hf/thebloke/openhermes-2.5-mistral-7b-awq',
+  '@cf/microsoft/phi-2',
+  '@cf/qwen/qwen1.5-0.5b-chat',
+  '@cf/qwen/qwen1.5-1.8b-chat',
+  '@cf/qwen/qwen1.5-14b-chat-awq',
+  '@cf/qwen/qwen1.5-7b-chat-awq',
+  '@cf/defog/sqlcoder-7b-2',
+  '@hf/nexusflow/starling-lm-7b-beta',
+  '@cf/tinyllama/tinyllama-1.1b-chat-v1.0',
+  '@cf/fblgit/una-cybertron-7b-v2-bf16',
+  '@hf/thebloke/zephyr-7b-beta-awq',
 ];
+
+const { data: serverModels } = await useFetch('/api/models');
+
+const models = computed(() =>
+  serverModels.value?.length ? serverModels.value : defaultModels
+);
 </script>
