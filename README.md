@@ -2,7 +2,7 @@
 
 [![NuxtHub AI Chat](https://github.com/user-attachments/assets/f393167e-7d21-4d7b-bacf-101103c1d093)](https://hub-chat.nuxt.dev)
 
-Demo: https://hub-chat.nuxt.dev
+Demo: <https://hub-chat.nuxt.dev>
 
 [![Deploy to NuxtHub](https://hub.nuxt.com/button.svg)](https://hub.nuxt.com/new?template=ai-chat)
 
@@ -44,19 +44,30 @@ This project is a chat interface to interact with various text generation models
 pnpm i
 ```
 
-2. Link your NuxtHub project to use AI models in development (it will ask you to create one if you don't have any)
+2. Rename `.env.example` to `.env` and update the following environment variables (for NuxtHub project key see point 3):
+
+```bash
+# Directly set your nuxthub project key without running npx nuxthub link
+NUXT_HUB_PROJECT_KEY=your_nuxthub_project_key
+# how to find account id for workers/pages https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/#find-account-id-workers-and-pages
+CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
+# How to create PAI token https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+CLOUDFLARE_API_TOKEN=your_cloudflare_api_token
+```
+
+3. If you didn't set your NuxtHub project key in point 2 above, link your NuxtHub project to use AI models in development (it will ask you to create one if you don't have any)
 
 ```bash
 npx nuxthub link
 ```
 
-3. Start the application in development mode
+4. Start the application in development mode
 
 ```bash
 pnpm dev
 ```
 
-Open http://localhost:3000 in your browser.
+Open <http://localhost:3000> in your browser.
 
 ## Deployment
 
@@ -70,13 +81,16 @@ Open http://localhost:3000 in your browser.
 
 [Learn more about Git integration](https://hub.nuxt.com/docs/getting-started/deploy#cloudflare-pages-ci)
   
-### Deploy via NuxtHub CLI:
+### Deploy via NuxtHub CLI
 
 ```bash
 npx nuxthub deploy
 ```
 
 [Learn more about CLI deployment](https://hub.nuxt.com/docs/getting-started/deploy#nuxthub-cli)
+
+> [!NOTE]
+> Do not forget to add the environment variables to your project's settings
 
 ## License
 
