@@ -14,6 +14,7 @@ This project is a chat interface to interact with various text generation models
 
 ## Features
 
+* Auto updating AI models list (uses Cloudflare API)
 * Select the text generation model to interact with
 * Set different LLM parameters (temperature, max tokens, system prompt, top_p, top_k, etc.)
 * Toggle LLM response streaming on/off
@@ -51,9 +52,11 @@ pnpm i
 NUXT_HUB_PROJECT_KEY=your_nuxthub_project_key
 # how to find account id for workers/pages https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/#find-account-id-workers-and-pages
 CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
-# How to create PAI token https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+# How to create API token https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
 CLOUDFLARE_API_TOKEN=your_cloudflare_api_token
 ```
+
+Cloudflare AccountId and API token (with Workers AI Read permissions) are required for auto-updating the AI models list (cached in nitro for a day, see `server/api/models.get.ts`).
 
 3. If you didn't set your NuxtHub project key in point 2 above, link your NuxtHub project to use AI models in development (it will ask you to create one if you don't have any)
 
@@ -80,7 +83,7 @@ Open <http://localhost:3000> in your browser.
 * Deploy from the Admin console.
 
 [Learn more about Git integration](https://hub.nuxt.com/docs/getting-started/deploy#cloudflare-pages-ci)
-  
+
 ### Deploy via NuxtHub CLI
 
 ```bash
