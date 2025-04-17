@@ -1,50 +1,52 @@
 <template>
   <div class="h-dvh flex flex-col md:flex-row">
     <USlideover
-      v-model="isDrawerOpen"
-      class="md:hidden"
-      :ui="{ width: 'max-w-xs' }"
+      v-model:open="isDrawerOpen"
+      class="max-w-xs"
+      title="LLM Settings"
+      description="Change LLM model and its settings"
     >
-      <LlmSettings
-        v-model:llm-params="llmParams"
-        @hide-drawer="isDrawerOpen = false"
-        @reset="resetSettings"
-      />
+      <template #content>
+        <LlmSettings
+          v-model:llm-params="llmParams"
+          @hide-drawer="isDrawerOpen = false"
+          @reset="resetSettings"
+        />
+      </template>
     </USlideover>
 
-    <div class="hidden md:block md:w-1/3 lg:w-1/4">
+    <div class="hidden md:block md:w-1/3 lg:w-1/4 max-w-sm">
       <LlmSettings v-model:llm-params="llmParams" @reset="resetSettings" />
     </div>
 
-    <UDivider orientation="vertical" class="hidden md:block" />
+    <USeparator orientation="vertical" class="hidden md:block" />
 
-    <div class="flex-grow md:w-2/3 lg:w-3/4">
-      <ChatPanel
-        :chat-history="chatHistory"
-        :loading="loading"
-        @clear="chatHistory = []"
-        @message="sendMessage"
-        @show-drawer="isDrawerOpen = true"
-      />
-    </div>
+    <ChatPanel
+      class="flex-grow"
+      :chat-history="chatHistory"
+      :loading="loading"
+      @clear="chatHistory = []"
+      @message="sendMessage"
+      @show-drawer="isDrawerOpen = true"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useStorageAsync } from '@vueuse/core';
-import type { ChatMessage, LlmParams, LoadingType } from '~~/types';
+import { useStorageAsync } from "@vueuse/core";
+import type { ChatMessage, LlmParams, LoadingType } from "~~/types";
 
 const isDrawerOpen = ref(false);
 
 const defaultSettings: LlmParams = {
-  model: '@cf/meta/llama-3.2-3b-instruct',
+  model: "@cf/meta/llama-3.2-3b-instruct",
   temperature: 0.6,
   maxTokens: 512,
-  systemPrompt: 'You are a helpful assistant.',
+  systemPrompt: "You are a helpful assistant.",
   stream: true,
 };
 
-const llmParams = useStorageAsync<LlmParams>('llmParams', {
+const llmParams = useStorageAsync<LlmParams>("llmParams", {
   ...defaultSettings,
 });
 const resetSettings = () => {
@@ -52,14 +54,14 @@ const resetSettings = () => {
 };
 
 const chatHistory = ref<ChatMessage[]>([]);
-const loading = ref<LoadingType>('idle');
+const loading = ref<LoadingType>("idle");
 async function sendMessage(message: string) {
-  chatHistory.value.push({ role: 'user', content: message });
+  chatHistory.value.push({ role: "user", content: message });
 
   try {
-    loading.value = llmParams.value.stream ? 'stream' : 'message';
+    loading.value = llmParams.value.stream ? "stream" : "message";
 
-    const response = useAIChat('/api/chat', llmParams.value.model, {
+    const response = useAIChat("/api/chat", llmParams.value.model, {
       ...llmParams.value,
       model: undefined,
       messages: chatHistory.value,
@@ -73,7 +75,7 @@ async function sendMessage(message: string) {
       } else {
         // add a new message to the chat history
         chatHistory.value.push({
-          role: 'assistant',
+          role: "assistant",
           content: chunk,
         });
 
@@ -81,9 +83,9 @@ async function sendMessage(message: string) {
       }
     }
   } catch (error) {
-    console.error('Error sending message:', error);
+    console.error("Error sending message:", error);
   } finally {
-    loading.value = 'idle';
+    loading.value = "idle";
   }
 }
 </script>

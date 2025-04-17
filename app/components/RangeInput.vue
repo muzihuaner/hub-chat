@@ -1,5 +1,5 @@
 <template>
-  <UFormGroup :label="label" :ui="{ container: 'mt-2' }">
+  <UFormField :label="label" :ui="{ container: 'mt-2' }">
     <template #hint>
       <UInput
         v-model="model"
@@ -10,7 +10,7 @@
         :step="step"
       />
     </template>
-    <URange
+    <USlider
       :key="`${label}-${rangeKey}`"
       v-model="model"
       :min="min"
@@ -18,7 +18,7 @@
       :step="step"
       size="sm"
     />
-  </UFormGroup>
+  </UFormField>
 </template>
 
 <script setup lang="ts">
@@ -43,8 +43,8 @@ defineProps({
   },
 });
 
-// This is needed to force a re-render of the range component (using a key)
-// (to update the slider thumb), when value is read from localStorage
+// Needed to force a re-render of the range component when the value is
+// read from localStorage (updates the key to force a re-render)
 const rangeKey = ref(0);
 onMounted(() => {
   rangeKey.value++;

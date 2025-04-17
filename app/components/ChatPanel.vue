@@ -5,7 +5,7 @@
       @clear="$emit('clear')"
       @show-drawer="$emit('showDrawer')"
     />
-    <UDivider />
+    <USeparator />
     <div ref="chatContainer" class="flex-1 overflow-y-auto p-4 space-y-5">
       <div
         v-for="(message, index) in chatHistory"
@@ -13,18 +13,20 @@
         class="flex items-start gap-x-4"
       >
         <div
-          class="w-12 h-12 p-2 rounded-full"
+          class="w-12 h-12 p-3 rounded-full"
           :class="`${
-            message.role === 'user' ? 'bg-primary/20' : 'bg-blue-500/20'
+            message.role === 'user'
+              ? 'bg-[var(--ui-primary)]/20'
+              : 'bg-blue-500/20'
           }`"
         >
           <UIcon
             :name="`${
               message.role === 'user'
-                ? 'i-heroicons-user-16-solid'
-                : 'i-heroicons-sparkles-solid'
+                ? 'i-lucide-user-round'
+                : 'i-lucide-sparkles'
             }`"
-            class="w-8 h-8"
+            class="w-6 h-6"
             :class="`${
               message.role === 'user' ? 'text-primary-400' : 'text-blue-400'
             }`"
@@ -38,26 +40,29 @@
       <ChatLoadingSkeleton v-if="loading === 'message'" />
       <NoChats v-if="chatHistory.length === 0" class="h-full" />
     </div>
-    <UDivider />
-    <div class="flex items-start p-3.5 relative">
+
+    <div
+      class="flex items-start mx-4 mb-4 rounded-lg relative bg-gray-100 dark:bg-gray-800"
+    >
       <UTextarea
         ref="userInput"
         v-model="userMessage"
-        placeholder="How can I help you today?"
-        class="w-full"
-        :ui="{ padding: { xl: 'pr-11' } }"
-        :rows="1"
-        :maxrows="5"
-        :disabled="loading !== 'idle'"
         autoresize
+        class="w-full"
+        placeholder="How can I help you today?"
         size="xl"
+        variant="none"
+        :disabled="loading !== 'idle'"
+        :maxrows="5"
+        :rows="1"
+        :ui="{ base: 'ps-4 py-4 pe-16' }"
         @keydown.enter.exact.prevent="sendMessage"
         @keydown.enter.shift.exact.prevent="userMessage += '\n'"
       />
 
       <UButton
-        icon="i-heroicons-arrow-up-20-solid"
-        class="absolute top-5 right-5"
+        icon="i-lucide-arrow-up"
+        class="absolute top-3 right-4"
         :disabled="loading !== 'idle'"
         @click="sendMessage"
       />
@@ -66,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ChatMessage, LoadingType } from '~~/types';
+import type { ChatMessage, LoadingType } from "~~/types";
 
 const props = defineProps<{
   chatHistory: ChatMessage[];
@@ -79,8 +84,8 @@ const emit = defineEmits<{
   showDrawer: [];
 }>();
 
-const userMessage = ref('');
-const chatContainer = useTemplateRef('chatContainer');
+const userMessage = ref("");
+const chatContainer = useTemplateRef("chatContainer");
 let observer: MutationObserver | null = null;
 
 onMounted(() => {
@@ -105,23 +110,23 @@ onUnmounted(() => {
   }
 });
 
-const userInput = useTemplateRef('userInput');
+const userInput = useTemplateRef("userInput");
 watch(
   () => props.loading,
   () => {
-    if (props.loading === 'idle') {
+    if (props.loading === "idle") {
       nextTick(() => {
-        userInput.value?.textarea.focus();
+        userInput.value?.textareaRef?.focus();
       });
     }
-  }
+  },
 );
 
 const sendMessage = () => {
   if (!userMessage.value.trim()) return;
 
-  emit('message', userMessage.value);
+  emit("message", userMessage.value);
 
-  userMessage.value = '';
+  userMessage.value = "";
 };
 </script>
