@@ -8,8 +8,8 @@
     <USeparator />
     <div ref="chatContainer" class="flex-1 overflow-y-auto p-4 space-y-5">
       <div
-        v-for="(message, index) in chatHistory"
-        :key="`message-${index}`"
+        v-for="message in chatHistory"
+        :key="message.id"
         class="flex items-start gap-x-4"
       >
         <div
@@ -35,7 +35,11 @@
         <div v-if="message.role === 'user'">
           {{ message.content }}
         </div>
-        <AssistantMessage v-else :content="message.content" />
+        <AssistantMessage
+          v-else
+          :content="message.content"
+          :message-id="message.id"
+        />
       </div>
       <ChatLoadingSkeleton v-if="loading === 'message'" />
       <NoChats v-if="chatHistory.length === 0" class="h-full" />

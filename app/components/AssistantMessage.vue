@@ -11,9 +11,10 @@ import { parseMarkdown } from "#imports";
 
 const props = defineProps<{
   content: string;
+  messageId: string;
 }>();
 
-const { data: ast, refresh } = await useAsyncData(useId(), () =>
+const { data: ast, refresh } = await useAsyncData(props.messageId, () =>
   parseMarkdown(props.content),
 );
 

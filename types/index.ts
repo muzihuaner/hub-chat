@@ -14,6 +14,7 @@ export type LlmParams = {
 export type ChatMessage = {
   role: string;
   content: string;
+  id: string;
 };
 
-export type LoadingType = 'idle' | 'stream' | 'message';
+export type LoadingType = "idle" | "stream" | "message";

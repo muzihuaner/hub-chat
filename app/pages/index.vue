@@ -56,7 +56,11 @@ const resetSettings = () => {
 const chatHistory = ref<ChatMessage[]>([]);
 const loading = ref<LoadingType>("idle");
 async function sendMessage(message: string) {
-  chatHistory.value.push({ role: "user", content: message });
+  chatHistory.value.push({
+    role: "user",
+    content: message,
+    id: String(Date.now()),
+  });
 
   try {
     loading.value = llmParams.value.stream ? "stream" : "message";
@@ -77,6 +81,7 @@ async function sendMessage(message: string) {
         chatHistory.value.push({
           role: "assistant",
           content: chunk,
+          id: String(Date.now()),
         });
 
         responseAdded = true;
