@@ -7,41 +7,19 @@
     />
     <USeparator />
     <div ref="chatContainer" class="flex-1 overflow-y-auto p-4 space-y-5">
-      <div
-        v-for="message in chatHistory"
-        :key="message.id"
-        class="flex items-start gap-x-4"
-      >
-        <div
-          class="w-12 h-12 p-3 rounded-full"
-          :class="`${
-            message.role === 'user'
-              ? 'bg-[var(--ui-primary)]/20'
-              : 'bg-blue-500/20'
-          }`"
-        >
-          <UIcon
-            :name="`${
-              message.role === 'user'
-                ? 'i-lucide-user-round'
-                : 'i-lucide-sparkles'
-            }`"
-            class="w-6 h-6"
-            :class="`${
-              message.role === 'user' ? 'text-primary-400' : 'text-blue-400'
-            }`"
-          />
-        </div>
-        <div v-if="message.role === 'user'">
-          {{ message.content }}
-        </div>
+      <template v-for="message in chatHistory" :key="message.id">
+        <UserMessage
+          v-if="message.role === 'user'"
+          :content="message.content"
+        />
+
         <AssistantMessage
           v-else
           :content="message.content"
           :message-id="message.id"
         />
-      </div>
-      <ChatLoadingSkeleton v-if="loading === 'message'" />
+      </template>
+      <ChatLoadingSkeleton v-if="loading === 'message'" class="p-4" />
       <NoChats v-if="chatHistory.length === 0" class="h-full" />
     </div>
 
