@@ -1,10 +1,14 @@
 # Cloudflare Workers AI LLM Playground with Nuxt 💬
 
-[![NuxtHub AI Chat](https://github.com/user-attachments/assets/f393167e-7d21-4d7b-bacf-101103c1d093)](https://hub-chat.nuxt.dev)
+[![NuxtHub AI Chat](https://github.com/user-attachments/assets/f393167e-7d21-4d7b-bacf-101103c1d093)](https://hub-chat.rajeevs.workers.dev)
 
-Demo: <https://hub-chat.nuxt.dev>
+Demo: [https://hub-chat.rajeevs.workers.dev](https://hub-chat.rajeevs.workers.dev)
 
 [![Deploy to NuxtHub](https://hub.nuxt.com/button.svg)](https://hub.nuxt.com/new?template=ai-chat)
+
+## Udpate (04/23/2025)
+
+The project is now deployable on Cloudflare Workers using NuxtHub. The main branch supports `workers` deployment (along with Nuxt UI v3). To deploy using Cloudflare Pages + Workers, please see the `pages` branch.
 
 ## Overview
 
